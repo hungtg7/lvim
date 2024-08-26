@@ -169,6 +169,10 @@ lvim.builtin.bigfile.config = {
 }
 
 
+-- nvim tree folder
+lvim.builtin.nvimtree.setup.view.adaptive_size = true
+
+
 -- Python config
 -- setup formatting
 local formatters = require "lvim.lsp.null-ls.formatters"
