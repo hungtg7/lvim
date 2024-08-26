@@ -97,6 +97,9 @@ keymap("x", "<leader>fm", ":lua vim.lsp.buf.range_formatting()", opts)
 keymap("n", "<TAB>", ":bnext<CR>", opts)
 keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
 
+-- Don't overwrite paste content in visual mode
+keymap("v", "p", '"_dP', opts)
+
 -- Jump faster
 keymap("n", "H", "^", opts)
 keymap("n", "L", "$", opts)
@@ -176,4 +179,4 @@ local linters = require "lvim.lsp.null-ls.linters"
 linters.setup { { command = "flake8", filetypes = { "python" } } }
 
 -- theme
-lvim.colorscheme = "lunaperche"
+lvim.colorscheme = "slate"
