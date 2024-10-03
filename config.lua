@@ -14,14 +14,13 @@
 --   Color scheme
 -- User plugin
 lvim.plugins = {
-    { 'kevinhwang91/promise-async' },
     {
         "hadronized/hop.nvim",
         config = function()
             require("hop").setup({})
         end,
-    },                           -- Hop around file easymotion
-    { 'kevinhwang91/nvim-ufo' }, -- ufo require promise-async
+    },                                                                        -- Hop around file easymotion
+    { 'navarasu/onedark.nvim' },
     {
         "Pocco81/auto-save.nvim",
         config = function()
@@ -80,12 +79,6 @@ vim.opt.scrolloff = 8             -- scroll before reach last line
 vim.opt.sidescrolloff = 8
 vim.opt.completeopt = 'menuone,noselect'
 -- Folding code block
-vim.opt.foldcolumn = '1'
-vim.opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.opt.foldlevelstart = 99
-vim.opt.foldenable = true
-vim.opt.foldmethod = 'syntax'
-vim.opt.autoindent = false
 
 local opts = { noremap = true, silent = true }
 -- Shorten function name
@@ -140,10 +133,6 @@ lvim.builtin.which_key.mappings["<space>"] = {
 }
 lvim.builtin.which_key.mappings["q"] = { "<cmd>BufferKill<CR>", "Close Buffer" }
 lvim.builtin.which_key.mappings["p"] = { "<cmd>Telescope projects<cr>", "Projects" }
--- Folding
-lvim.builtin.which_key.mappings["z"] = { "Folding code" }
-lvim.builtin.which_key.mappings["zM"] = { require('ufo').closeAllFolds, "Close all Fold code" }
-lvim.builtin.which_key.mappings["zM"] = { require('ufo').openAllFolds, "Open all Fold code" }
 -- sellect opened buffer
 lvim.builtin.which_key.mappings["<TAB>"] = { "<cmd>Telescope buffers<cr>", "Select opened buffer" }
 
@@ -182,5 +171,19 @@ formatters.setup { { name = "black" }, }
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup { { command = "flake8", filetypes = { "python" } } }
 
--- theme
-lvim.colorscheme = "slate"
+
+lvim.colorscheme = "onedark"
+
+-- Folding
+-- -- folding powered by treesitter
+-- https://github.com/nvim-treesitter/nvim-treesitter#folding
+-- look for foldenable: https://github.com/neovim/neovim/blob/master/src/nvim/options.lua
+-- Vim cheatsheet, look for folds keys: https://devhints.io/vim
+vim.opt.foldenable = false -- if this option is true and fold method option is other than normal, every time a docume
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.fillchars = "fold: "
+vim.wo.foldnestmax = 3
+vim.wo.foldminlines = 1
+vim.wo.foldlevel = 1
+vim.wo.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
