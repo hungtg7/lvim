@@ -19,7 +19,7 @@ lvim.plugins = {
         config = function()
             require("hop").setup({})
         end,
-    },                                                                        -- Hop around file easymotion
+    }, -- Hop around file easymotion
     { 'navarasu/onedark.nvim' },
     {
         "Pocco81/auto-save.nvim",
@@ -40,7 +40,9 @@ lvim.plugins = {
             })
         end,
     },
-    { "tpope/vim-surround" } -- Easy to modify brackets
+    { "tpope/vim-surround" }, -- Easy to modify brackets
+    { "rust-lang/rust.vim" },
+    { "fatih/vim-go" },
 }
 
 -- Vim settings
@@ -171,7 +173,7 @@ formatters.setup { { name = "black" }, }
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup { { command = "flake8", filetypes = { "python" } } }
 
-
+-- color schme
 lvim.colorscheme = "onedark"
 
 -- Folding
@@ -186,4 +188,5 @@ vim.wo.fillchars = "fold: "
 vim.wo.foldnestmax = 3
 vim.wo.foldminlines = 1
 vim.wo.foldlevel = 1
-vim.wo.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+vim.wo.foldtext =
+[[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]

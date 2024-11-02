@@ -1,0 +1,15 @@
+{
+    "rust-analyzer.rustfmt.extraArgs": [
+        "+nightly"
+    ],
+    "rust-analyzer.rustfmt.overrideCommand": [
+        "rustup",
+        "run",
+        "nightly",
+        "--",
+        "rustfmt",
+        "--edition",
+        "2018",
+        "--"
+    ],
+}
