@@ -117,8 +117,6 @@ end, { remap = true })
 -- Config core plugin
 local cmp_mapping = require "cmp.config.mapping"
 lvim.builtin.cmp.mapping["<CR>"] = cmp_mapping.confirm({ select = true })
-lvim.format_on_save.enabled = false
-lvim.format_on_save.pattern = { "*.py" }
 
 
 -- Fix auti indent python, rust
@@ -190,3 +188,7 @@ vim.wo.foldminlines = 1
 vim.wo.foldlevel = 1
 vim.wo.foldtext =
 [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+
+
+-- vim-go
+vim.g.go_fmt_autosave = 0
