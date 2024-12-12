@@ -192,3 +192,9 @@ vim.wo.foldtext =
 
 -- vim-go
 vim.g.go_fmt_autosave = 0
+
+
+-- Prevent auto update current dir 
+-- https://github.com/LunarVim/LunarVim/discussions/2238
+-- lvim.builtin.project.detection_methods = { "pattern" } -- lvim default [1]
+lvim.builtin.project.patterns = { ">Projects", ".git" } -- defaults include other VCSs, Makefile, package.json
